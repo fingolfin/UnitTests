@@ -1,0 +1,11 @@
+/doc/*.html
+/doc/*.txt
+/doc/*.css
+/doc/*.js
+/doc/UnitTests.idx
+/doc/UnitTests.log
+/doc/UnitTests.out
+/doc/UnitTests.tex
+/doc/manual.lab
+/doc/manual.pdf
+/doc/manual.six
