@@ -1,0 +1,25 @@
+local G, oldlevel;
+
+AddSetup(function()
+	oldlevel := InfoLevel(InfoWarning);
+	SetInfoLevel(InfoWarning, 1);
+	G := SmallGroup(8, 4);
+	return true; # return false to indicate a setup failure
+end);
+AddTearDown(function()
+	SetInfoLevel(InfoWarning, oldlevel);
+end);
+AddTest("TEST_size", function()
+	AssertEqual( Size(G), 8 );
+end);
+AddTest("TEST_id", function()
+	AssertEqual( IdSmallGroup(G), [8, 4] );
+end);
+
+AddFailingTest("TEST_expected_fail", function()
+	AssertEqual( Size(G), 7 );
+end);
+
+AddFailingTest("TEST_unexpected_pass", function()
+	AssertEqual( 17, 17 );
+end);
