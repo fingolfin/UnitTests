@@ -1,19 +1,19 @@
 InstallGlobalFunction( AssertEqual, function(a,b)
 	if not (a = b) then
 		# FIXME: String, ViewString, PrintString, DisplayString... ???
-		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but instead got <", String(a), ">"));
+		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but got <", String(a), ">"));
 	fi;
 end );
 
 InstallGlobalFunction( AssertTrue, function(a)
   if not a then
-	  JUMP_TO_CATCH("Assertion Failure\n");
+	  JUMP_TO_CATCH("expected true but got false");
   fi;
 end );
 
 InstallGlobalFunction( AssertFalse, function(a)
   if a then
-	  JUMP_TO_CATCH("Assertion Failure\n");
+	  JUMP_TO_CATCH("expected false but got false");
   fi;
 end );
 
@@ -21,7 +21,7 @@ end );
 __TEST_SUITE_FUNC__ := fail;
 
 InstallGlobalFunction( InstantiateTestSuite, function(arg)
-	local filename, suite, AddSetup, AddTearDown, AddTest, AddFailingTest, func_src;
+	local filename, suite, AddSetup, AddTearDown, AddTestCase, AddFailingTestCase, func_src;
 	filename := arg[1];
 	suite := rec(
 				setup := ReturnTrue,
@@ -34,10 +34,10 @@ InstallGlobalFunction( InstantiateTestSuite, function(arg)
 	AddTearDown := function(teardown)
 		suite.teardown := teardown;
 	end;
-	AddTest := function(name,test)
+	AddTestCase := function(name,test)
 		Add(suite.tests, [name,test,false]);
 	end;
-	AddFailingTest := function(name,test)
+	AddFailingTestCase := function(name,test)
 		Add(suite.tests, [name,test,true]);
 	end;
 
@@ -47,7 +47,7 @@ InstallGlobalFunction( InstantiateTestSuite, function(arg)
     # from the parsing to a global variable.
 	func_src := StringFile(filename);
 	func_src := Concatenation(
-		"__TEST_SUITE_FUNC__:=function(AddSetup,AddTearDown,AddTest,AddFailingTest,args)\n",
+		"__TEST_SUITE_FUNC__:=function(AddSetup,AddTearDown,AddTestCase,AddFailingTestCase,args)\n",
 		"  CallFuncList(function(arg)\n",
 		     func_src, "\n",
 		"  end, args);\n",
@@ -55,7 +55,7 @@ InstallGlobalFunction( InstantiateTestSuite, function(arg)
 	Read(InputTextString(func_src));
 
 	# now execute the new function to populate "suite"
-	CallFuncList(__TEST_SUITE_FUNC__, [AddSetup, AddTearDown, AddTest, AddFailingTest, arg{[2..Length(arg)]}]);
+	CallFuncList(__TEST_SUITE_FUNC__, [AddSetup, AddTearDown, AddTestCase, AddFailingTestCase, arg{[2..Length(arg)]}]);
 
 	return suite;
 end );

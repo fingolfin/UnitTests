@@ -15,18 +15,27 @@ AddTearDown(function()
 	SetInfoLevel(InfoWarning, oldlevel);
 end);
 
-AddTest("group size", function()
+# a working test
+AddTestCase("group size", function()
 	AssertEqual( Size(G), 8 );
 end);
 
-AddTest("small group id", function()
+# another working test
+AddTestCase("small group id", function()
 	AssertEqual( IdSmallGroup(G), [8, 4] );
 end);
 
-AddFailingTest("size_expected_fail", function()
+# a failing test (oops)
+AddTestCase("small group id", function()
+	AssertTrue( IsAbelian(G) );
+end);
+
+# a known-to-fail test
+AddFailingTestCase("size_expected_fail", function()
 	AssertEqual( Size(G), 7 );
 end);
 
-AddFailingTest("dummy_unexpected_pass", function()
+# a known-to-fail test that actually passes
+AddFailingTestCase("dummy_unexpected_pass", function()
 	AssertEqual( 17, 17 );
 end);

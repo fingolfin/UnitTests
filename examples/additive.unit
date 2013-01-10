@@ -5,7 +5,7 @@ b := arg[2];
 
 # would be nice if "a+b" was available as both string and evaluated value
 
-AddTest("plus", function()
+AddTestCase("plus", function()
 	AssertEqual( a, 1 * a );
 	AssertEqual( a + a, 2 * a );
 	# Commutative, associative
@@ -13,14 +13,14 @@ AddTest("plus", function()
 	AssertEqual( (a + b) + a, a + (b + a) );
 end);
 
-AddTest("ainv", function()
+AddTestCase("ainv", function()
 	AssertEqual( -(-a), a );
 	AssertEqual( -(a+b), -a - b );
 	AssertEqual( -a, (-1) * a );
 	AssertTrue( IsZero( a + (-a) ) );
 end);
 
-AddTest("zero", function()
+AddTestCase("zero", function()
 	# is zero neutral and idempotent?
 	AssertEqual( a + Zero(a), a );
 	AssertEqual( Zero(a) + Zero(a), Zero(a) );
