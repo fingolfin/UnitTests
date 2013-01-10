@@ -1,1 +1,25 @@
-TODO
+TODO:
+
+- Test assertions should (optionally) provide more info about how and where they
+  occurred
+- Make it possible to optionally enter a break loop when a test assertion triggers
+- Allow nesting test suites
+- use color to mark fail (red), pass (green), expected fail, unexpected pass.
+- consider supporting TAP protocol so that we can interface with other test
+  frameworks and test harnesses. see http://en.wikipedia.org/wiki/Test_Anything_Protocol
+- turn test suites into a proper GAP type TestSuite
+
+
+- write good documentation:
+-- briefly summarize what unit testing is about (give links for details),
+   what advantages and disadvantages it has compared to classic GAP tests
+-- include examples
+-- explain  why test files are "functions": So that we have locality of
+   variables and get warnings when accidentally violating scope.
+
+- Perhaps we can prevent use of some potentially unsafe global functions
+  inside of tests, such as BindGlobal. This could be achieved by
+  "hiding" them behind additional local variables.
+  However, it is not clear to me whether this is worth the effort, and
+  a malicious user could easily bypass it with help of Read() anyway.
+  It mostly would be there to help avoid some "obvious" mistakes...
