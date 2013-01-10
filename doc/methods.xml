@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Chapter Label="intro">
+<Heading>Methods</Heading>
+
+
+<Section Label="Assertions">
+<Heading>Assertions</Heading>
+
+<#Include Label="AssertTrue">
+<#Include Label="AssertFalse">
+<#Include Label="AssertEqual">
+
+</Section>
+
+<Section Label="Suites">
+<Heading>Loading and running test suites</Heading>
+
+<#Include Label="InstantiateTestSuite">
+<#Include Label="RunTestSuite">
+
+</Section>
+
+</Chapter>

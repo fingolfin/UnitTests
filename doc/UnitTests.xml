@@ -51,6 +51,7 @@
 <Index>&UnitTests;</Index>
 
 <#Include SYSTEM "intro.xml">
+<#Include SYSTEM "methods.xml">
 
 
 </Body>

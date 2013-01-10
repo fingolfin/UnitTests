@@ -17,7 +17,7 @@ SetGapDocLaTeXOptions( "utf8" );
 #WriteBibXMLextFile( "doc/AutoDocBib.xml", bib );
 
 # List of files to scan
-files := [ "../PackageInfo.g" ];;
+files := [ "../PackageInfo.g", "../lib/units.gd" ];;
 
 # Update the VERSION file
 PrintTo( "../VERSION", PackageInfo( "UnitTests" )[1].Version );
