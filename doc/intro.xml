@@ -3,11 +3,16 @@
 <Chapter Label="intro">
 <Heading>Introduction</Heading>
 
-<Section Label="AutoDoc_exp">
-<Heading>What is the idea of the &UnitTests; package?</Heading>
+The goal of this package is to provide a unit test framework for GAP
+and GAP packages. As such, it is not meant to replace the existing
+test functionality in GAP, but rather to complement it.<P/>
 
-TODO
+This package is still in early development. Feedback on its design
+and functionality, as well as pull requests and patches, are highly
+welcome. The latest version can always be found at
 
-</Section>
+<Homepage>http://github.com/fingolfin/UnitTests/</Homepage>
+
+
 
 </Chapter>
