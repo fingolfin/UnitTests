@@ -1,25 +1,32 @@
 local G, oldlevel;
 
+# Optionally perform some setup whenever an instance
+# of this test suite is run.
 AddSetup(function()
 	oldlevel := InfoLevel(InfoWarning);
 	SetInfoLevel(InfoWarning, 1);
 	G := SmallGroup(8, 4);
 	return true; # return false to indicate a setup failure
 end);
+
+# Optionally perform some setup after an instance
+# of this test suite has been run.
 AddTearDown(function()
 	SetInfoLevel(InfoWarning, oldlevel);
 end);
-AddTest("TEST_size", function()
+
+AddTest("group size", function()
 	AssertEqual( Size(G), 8 );
 end);
-AddTest("TEST_id", function()
+
+AddTest("small group id", function()
 	AssertEqual( IdSmallGroup(G), [8, 4] );
 end);
 
-AddFailingTest("TEST_expected_fail", function()
+AddFailingTest("size_expected_fail", function()
 	AssertEqual( Size(G), 7 );
 end);
 
-AddFailingTest("TEST_unexpected_pass", function()
+AddFailingTest("dummy_unexpected_pass", function()
 	AssertEqual( 17, 17 );
 end);

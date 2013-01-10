@@ -1,28 +1,28 @@
-InstallGlobalFunction( AssertEqual, function(a,b)
+# TODO: It would be nicer if the assertions provided more info, e.g.
+# the precise line where the assertion occurred
+AssertEqual := function(a,b)
 	if not (a = b) then
 		# FIXME: String, ViewString, PrintString, DisplayString... ???
 		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but instead got <", String(a), ">"));
 	fi;
-end );
+end;
 
-InstallGlobalFunction( AssertTrue, function(a)
+AssertTrue := function(a)
   if not a then
 	  JUMP_TO_CATCH("Assertion Failure\n");
   fi;
-end );
+end;
 
-InstallGlobalFunction( AssertFalse, function(a)
+AssertFalse := function(a)
   if a then
 	  JUMP_TO_CATCH("Assertion Failure\n");
   fi;
-end );
+end;
 
 
-__TEST_SUITE_FUNC__ := fail;
-
-InstallGlobalFunction( InstantiateTestSuite, function(arg)
-	local filename, suite, AddSetup, AddTearDown, AddTest, AddFailingTest, func_src;
-	filename := arg[1];
+__TEST_CASE_TMP__:=fail;
+ReadTestCase := function(filename)
+	local suite, AddSetup, AddTearDown, AddTest, AddFailingTest, func_src; #, func;
 	suite := rec(
 				setup := ReturnTrue,
 				teardown := ReturnTrue,
@@ -40,27 +40,29 @@ InstallGlobalFunction( InstantiateTestSuite, function(arg)
 	AddFailingTest := function(name,test)
 		Add(suite.tests, [name,test,true]);
 	end;
-
-    # Read the test suite code, and "wrap" it into a function declaration.
-    # Then let GAP parse this. Unfortunately, there seems to be no way to
-    # parse it in the local context, hence we must assign the function resulting
-    # from the parsing to a global variable.
-	func_src := StringFile(filename);
+	#func := ReadAsFunction(filename);
+	# TODO: ReadAsFunction does not quite work as I want it to,
+	# it does not pass on the local vars.
+	# Workaround: Use ReadAsFunction on a custom stream.
+	# That stream wraps the file; it prepends
+	#  func := function(AddSetup, AddTearDown, AddTest)
+	# and append "end;"
+	func_src := StringFile("unit-test.g");
 	func_src := Concatenation(
-		"__TEST_SUITE_FUNC__:=function(AddSetup,AddTearDown,AddTest,AddFailingTest,args)\n",
-		"  CallFuncList(function(arg)\n",
-		     func_src, "\n",
-		"  end, args);\n",
-		"end;\n" );
+		"__TEST_CASE_TMP__ := function(AddSetup, AddTearDown, AddTest, AddFailingTest)\n",
+		func_src,
+		"\n",
+		"end;\n");
 	Read(InputTextString(func_src));
+	CallFuncList(__TEST_CASE_TMP__, [AddSetup, AddTearDown, AddTest, AddFailingTest]); # populate the suite
 
-	# now execute the new function to populate "suite"
-	CallFuncList(__TEST_SUITE_FUNC__, [AddSetup, AddTearDown, AddTest, AddFailingTest, arg{[2..Length(arg)]}]);
+# TODO: how can we optionally add further (optional?) parameters
+# in order to create a parametrized test suite? 
 
 	return suite;
-end );
+end;;
 
-InstallGlobalFunction( RunTestSuite, function(suite)
+RunTestSuite := function(suite)
 	local i, success, total, res;
 	if not suite.setup() then
 		Print("Test setup failed!");
@@ -68,7 +70,6 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 	fi;
 	success := 0;
 	total := Length(suite.tests);
-	Print("1..", total, "\n");
 	for i in [1..total] do
 		Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
 		res := CALL_WITH_CATCH(suite.tests[i][2], []);
@@ -85,6 +86,6 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 	suite.teardown();
 	# TODO: Measure elapsed time
 	Print("Results: ", success, " succeeded, ", total - success, " failed, total ", total, "\n");
-
+	
 	return success = total;
-end );
+end;
