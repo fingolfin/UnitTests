@@ -6,7 +6,7 @@
 SetPackageInfo( rec(
 
 PackageName := "UnitTests",
-Subtitle    := "Computation with polycyclic groups",
+Subtitle    := "Unit tests for GAP",
 Version     := "0.1dev",
 Date        := "09/01/2013",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
@@ -73,30 +73,7 @@ TestFile := "tst/testall.g",
 Autoload         := true,
 
 Keywords := [
-  "finitely generated nilpotent groups",
-  "metacyclic groups",
-  "collection",
-  "consistency check",
-  "solvable word problem",
-  "normalizers","centralizers", "intersection",
-  "conjugacy problem",
-  "subgroups of finite index",
-  "torsion subgroup", "finite subgroups",
-  "extensions",
-  "complements",
-  "cohomology groups",
-  "orbit-stabilizer algorithms",
-  "fitting subgroup",
-  "center",
-  "infinite groups",
-  "polycyclic generating sequence",
-  "polycyclic presentation",
-  "polycyclic group",
-  "polycyclically presented group",
-  "polycyclic presentation",
-  "maximal subgroups",
-  "Schur cover",
-  "Schur multiplicator",
+  "unit tests",
   ]
 ));
 
