@@ -5,6 +5,8 @@ TODO:
 
 - Make it possible to optionally enter a break loop when a test assertion triggers
 
+- allow (re-)running a subset of all tests
+
 - Allow nesting test suites
 
 - use color to mark fail (red), pass (green), expected fail, unexpected pass.
@@ -26,6 +28,13 @@ TODO:
     https://nose.readthedocs.org/en/latest/index.html
     http://www.voidspace.org.uk/python/articles/unittest2.shtml
     http://stackoverflow.com/questions/5532482/i-am-trying-to-develop-a-test-runner-in-python
+
+- new assertion methods:
+   assertGreater / assertLess / assertGreaterEqual / assertLessEqual
+   assertIs( G, IsAbelian );
+   assertIsNot( G, IsAbelian ); # check if object is in filter or not
+   assertRegexpMatches( text, regexp );  # requires regex support in GAP
+   assertIn( obj, list )
 
 - split test runner and test harness; allow using external test harness, possibly
   even ones with a GUI
@@ -58,3 +67,12 @@ TODO:
   However, it is not clear to me whether this is worth the effort, and
   a malicious user could easily bypass it with help of Read() anyway.
   It mostly would be there to help avoid some "obvious" mistakes...
+
+- add "generators" for fuzzy testing: an alternative variant of InstantiateTestSuite
+  would take a generator object / function instead of a list params to pass to the test.
+  then, this generator is invoked to generate parameters which are used to instantiate the
+  test.
+
+  Indeed, the result then could be an (possibly infinite) iterator ... asking it for the next
+  element would invoke the generator to generate a new input, then instantiate
+  a test suite for that, and return that.
