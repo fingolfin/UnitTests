@@ -37,13 +37,14 @@ Status         := "Dev",
 #CommunicatedBy := "TODO",
 #AcceptDate     := "01/2004",
 
-PackageWWWHome := "http://github.com/fingolfin/UnitTests/",
+PackageWWWHome := "https://github.com/fingolfin/UnitTests/",
 
-ArchiveFormats := ".tar.gz .tar.bz2",
+ArchiveFormats := ".tar.gz .zip",
+# TODO: Use https://github.com/fingolfin/UnitTests/archive/TAGNAME.tar.gz ?
 ArchiveURL     := Concatenation( ~.PackageWWWHome, "UnitTests-", ~.Version ),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-
+# TODO: Replace "master" with tag generated from Version ?
+README_URL     := Concatenation( ~.PackageWWWHome, "blob/master/README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "blob/master/PackageInfo.g" ),
 AbstractHTML   := "TODO",
 
 PackageDoc     := rec(
