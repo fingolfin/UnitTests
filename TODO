@@ -24,6 +24,7 @@ TODO:
 - get inspiration from other feature lists:
     https://github.com/KentBeck/junit/wiki
     https://nose.readthedocs.org/en/latest/index.html
+    http://www.voidspace.org.uk/python/articles/unittest2.shtml
     http://stackoverflow.com/questions/5532482/i-am-trying-to-develop-a-test-runner-in-python
 
 - split test runner and test harness; allow using external test harness, possibly
