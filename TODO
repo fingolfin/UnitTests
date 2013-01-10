@@ -9,8 +9,6 @@ TODO:
 
 - Allow nesting test suites
 
-- use color to mark fail (red), pass (green), expected fail, unexpected pass.
-
 - consider supporting TAP protocol so that we can interface with other test
   frameworks and test harnesses. see http://en.wikipedia.org/wiki/Test_Anything_Protocol
 

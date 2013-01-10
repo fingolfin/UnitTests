@@ -77,9 +77,11 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 		# Output status
 		if res[1] then
 			success := success + 1;
-			Print("ok ");
+			Print(TextAttr.bold, TextAttr.2, "ok ", TextAttr.reset);
+			#Print("ok ");
 		else
-			Print("not ok ");
+			Print(TextAttr.bold, TextAttr.1, "not ok ", TextAttr.reset);
+			#Print("not ok ");
 		fi;
 		# Output test number
 		Print(i);
