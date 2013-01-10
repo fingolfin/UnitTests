@@ -21,4 +21,43 @@
 
 </Section>
 
+
+<Section Label="InsideTest">
+<Heading>Methods to be used within test suites</Heading>
+
+<ManSection>
+  <Func Arg="func" Name="AddSetup"/>
+  <Returns>nothing</Returns>
+  <Description>
+    TODO
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Func Arg="func" Name="AddTearDown"/>
+  <Returns>nothing</Returns>
+  <Description>
+    TODO
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Func Arg="desc, func" Name="AddTestCase"/>
+  <Returns>nothing</Returns>
+  <Description>
+    TODO
+  </Description>
+</ManSection>
+
+<ManSection>
+  <Func Arg="desc, func" Name="AddFailingTestCase"/>
+  <Returns>nothing</Returns>
+  <Description>
+    TODO
+  </Description>
+</ManSection>
+
+</Section>
+
+
 </Chapter>
