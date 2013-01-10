@@ -60,6 +60,8 @@ InstallGlobalFunction( InstantiateTestSuite, function(arg)
 	return suite;
 end );
 
+# Run a test suite, output results in TAP format, or at least try to.
+# See <http://en.wikipedia.org/wiki/Test_Anything_Protocol>
 InstallGlobalFunction( RunTestSuite, function(suite)
 	local i, success, total, res;
 	if not suite.setup() then
@@ -70,20 +72,31 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 	total := Length(suite.tests);
 	Print("1..", total, "\n");
 	for i in [1..total] do
-		Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
+		#Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
 		res := CALL_WITH_CATCH(suite.tests[i][2], []);
-		if res[1] = true then
+		# Output status
+		if res[1] then
 			success := success + 1;
-			if suite.tests[i][3] then Print("unexpected "); fi;
-			Print("success\n");
+			Print("ok ");
 		else
-			if suite.tests[i][3] then Print("expected "); fi;
-			Print("failure\n");
-			if suite.tests[i][3] then Print("  ", res[2], "\n"); fi;
+			Print("not ok ");
 		fi;
+		# Output test number
+		Print(i);
+		# Output description
+		Print(" ", suite.tests[i][1]);
+		# Output directive, if any (i.e. mark test as expected fail, or as skipped
+		if suite.tests[i][3] then Print(" # TODO"); fi;
+		Print("\n");
+		# Optionally: Display diagnostics
+		if not res[1] then Print("# ", res[2], "\n"); fi;
+		
 	od;
 	suite.teardown();
+
 	# TODO: Measure elapsed time
+	# TODO: The following statistics really should be handled and printed by a test
+	# harness, not by us.
 	Print("Results: ", success, " succeeded, ", total - success, " failed, total ", total, "\n");
 
 	return success = total;
