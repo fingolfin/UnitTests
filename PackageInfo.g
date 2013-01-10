@@ -7,10 +7,10 @@ SetPackageInfo( rec(
 
 PackageName := "UnitTests",
 Subtitle    := "Computation with polycyclic groups",
-Version     := "0.1",
+Version     := "0.1dev",
 Date        := "09/01/2013",
 ##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "0.1">
+##  <!ENTITY VERSION "0.1dev">
 ##  <!ENTITY RELEASEDATE "January 2013">
 ##  <#/GAPDoc>
 
@@ -37,7 +37,7 @@ Status         := "Dev",
 #CommunicatedBy := "TODO",
 #AcceptDate     := "01/2004",
 
-PackageWWWHome := "http://github.com/fingolfin/UnitTestsForGAP/",
+PackageWWWHome := "http://github.com/fingolfin/UnitTests/",
 
 ArchiveFormats := ".tar.gz .tar.bz2",
 ArchiveURL     := Concatenation( ~.PackageWWWHome, "UnitTests-", ~.Version ),
