@@ -2,13 +2,47 @@ TODO:
 
 - Test assertions should (optionally) provide more info about how and where they
   occurred
+
 - Make it possible to optionally enter a break loop when a test assertion triggers
+
 - Allow nesting test suites
+
 - use color to mark fail (red), pass (green), expected fail, unexpected pass.
+
 - consider supporting TAP protocol so that we can interface with other test
   frameworks and test harnesses. see http://en.wikipedia.org/wiki/Test_Anything_Protocol
+
+- consider supporting JUnit XML output. See
+  http://stackoverflow.com/questions/4922867/junit-xml-format-specification-that-hudson-supports
+  https://nose.readthedocs.org/en/latest/plugins/xunit.html
+
+- perhaps we can use the Google Test UI: http://code.google.com/p/googletest/
+  another gui https://bitbucket.org/markroddy/unittestgui/src
+
 - turn test suites into a proper GAP type TestSuite
 
+- get inspiration from other feature lists:
+    https://github.com/KentBeck/junit/wiki
+    https://nose.readthedocs.org/en/latest/index.html
+    http://stackoverflow.com/questions/5532482/i-am-trying-to-develop-a-test-runner-in-python
+
+- split test runner and test harness; allow using external test harness, possibly
+  even ones with a GUI
+
+- allow specifying an explanation for "expected fail" tests, and print that
+  when running the test
+
+- add support for (conditionally) skipping tests. for example, some tests may
+  be very expensive, and we only want to run them when explicitly requested.
+  Or a test may be platform specific; a windows-only test should be skipped
+  elsewhere.
+  See e.g. <http://docs.python.org/dev/library/unittest.html#skipping-tests-and-expected-failures>
+
+- test skipping can also be nicely coupled with assumptions; see
+  <https://github.com/KentBeck/junit/wiki/Assumptions-with-assume>
+  to implement those, we could tweak our JUMP_TO_CATCH uses to return
+  more state, to show whether we exited due to a failed assumption,
+  a failed assertion, or an error.
 
 - write good documentation:
 -- briefly summarize what unit testing is about (give links for details),
