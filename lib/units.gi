@@ -63,7 +63,7 @@ end );
 # Run a test suite, output results in TAP format, or at least try to.
 # See <http://en.wikipedia.org/wiki/Test_Anything_Protocol>
 InstallGlobalFunction( RunTestSuite, function(suite)
-	local i, success, total, res;
+	local i, success, total, res, oldBreakOnError;
 	if not suite.setup() then
 		Print("Test setup failed!");
 		return false;
@@ -73,13 +73,17 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 	Print("1..", total, "\n");
 	for i in [1..total] do
 		#Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
+		oldBreakOnError := BreakOnError;
+		BreakOnError := false;
 		res := CALL_WITH_CATCH(suite.tests[i][2], []);
+		BreakOnError := true;
 		# Output status
 		if res[1] then
 			success := success + 1;
 			Print(TextAttr.bold, TextAttr.2, "ok ", TextAttr.reset);
 			#Print("ok ");
 		else
+			# TODO: distinguish between assertion failures, and errors
 			Print(TextAttr.bold, TextAttr.1, "not ok ", TextAttr.reset);
 			#Print("not ok ");
 		fi;

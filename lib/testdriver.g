@@ -63,7 +63,7 @@ ReadTestCase := function(filename)
 end;;
 
 RunTestSuite := function(suite)
-	local i, success, total, res;
+	local i, success, total, res, oldBreakOnError;
 	if not suite.setup() then
 		Print("Test setup failed!");
 		return false;
@@ -72,12 +72,16 @@ RunTestSuite := function(suite)
 	total := Length(suite.tests);
 	for i in [1..total] do
 		Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
+		oldBreakOnError := BreakOnError;
+		BreakOnError := false;
 		res := CALL_WITH_CATCH(suite.tests[i][2], []);
+		BreakOnError := true;
 		if res[1] = true then
 			success := success + 1;
 			if suite.tests[i][3] then Print("unexpected "); fi;
 			Print("success\n");
 		else
+			# TODO: distinguish between assertion failures, and errors
 			if suite.tests[i][3] then Print("expected "); fi;
 			Print("failure\n");
 			if suite.tests[i][3] then Print("  ", res[2], "\n"); fi;
