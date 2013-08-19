@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TitlePage>
+  <Title>UnitTests</Title>
+  <Subtitle>UnitTests is a unit test framework for GAP</Subtitle>
+  <TitleComment>
+    This manual is best viewed as an <B>HTML</B> document.
+
+    An <B>offline</B> version should be included in the documentation
+    subfolder of the package.
+  </TitleComment>
+  <Version>Version &VERSION;</Version>
+  <Date>&RELEASEDATE;</Date>
+  <Author>Max Horn
+    <Email>max@quendi.de</Email>
+  </Author>
+
+  <Copyright>
+    <Index>License</Index>
+    &copyright; 2013 Max Horn<P/>
+    The &UnitTests; package is free software;
+    you can redistribute it and/or modify it under the terms of the
+    <URL Text="GNU General Public License">http://www.fsf.org/licenses/gpl.html</URL>
+    as published by the Free Software Foundation; either version 2 of the License,
+    or (at your option) any later version.
+  </Copyright>
+  <Acknowledgements>
+    We appreciate very much all past and future comments, suggestions and
+    contributions to this package and its documentation provided by &GAP;
+    users and developers.
+  </Acknowledgements>
+
+</TitlePage>
