@@ -1,32 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- This is an automatically generated file. -->
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
-	  [
-	  <!ENTITY UnitTests '<Package>UnitTests</Package>'>
-      <#Include Label="PKGVERSIONDATA">
-	  ]
-	  >
-
+[
+<!ENTITY see '<Alt Only="LaTeX">$	o$</Alt><Alt Not="LaTeX">--&gt;</Alt>'>
+<!ENTITY UnitTests '<Package>UnitTests</Package>'>
+]
+>
 <Book Name="UnitTests">
-
 <#Include SYSTEM "title.xml">
-
-<!--  TableOfContents  . . . . . .  generate a table of contents   -->
 <TableOfContents/>
-
-<!--  chapters of the book  -->
 <Body>
-
 <Index>&UnitTests;</Index>
-
 <#Include SYSTEM "intro.xml">
 <#Include SYSTEM "methods.xml">
-
-
 </Body>
-
-<!--  And finally an index as well   -->
 <TheIndex/>
-
 </Book>
-

@@ -7,33 +7,33 @@ SetPackageInfo( rec(
 
 PackageName := "UnitTests",
 Subtitle    := "Unit tests for GAP",
-Version     := "0.1dev",
-Date        := "09/01/2013",
-##  <#GAPDoc Label="PKGVERSIONDATA">
-##  <!ENTITY VERSION "0.1dev">
-##  <!ENTITY RELEASEDATE "January 2013">
-##  <#/GAPDoc>
+Version     := "2013.08.19",
+#Version     := "0.1dev",
+#Date        := "09/01/2013",
+
+Date := ~.Version{[ 1 .. 10 ]},
+Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
 Persons          := [
   rec( LastName      := "Horn",
        FirstNames    := "Max",
        IsAuthor      := true,
        IsMaintainer  := true,
-       Email         := "max@quendi.de",
-       WWWHome       := "http://www.quendi.de/math.php",
+       Email         := "max.horn@math.uni-giessen.de",
+       WWWHome       := "http://www.quendi.de/math",
        PostalAddress := Concatenation(
                "AG Algebra\n",
                "Mathematisches Institut\n",
-               "JLU Gieﬂen\n",
-               "Arndtstrasse 2\n",
-               "D-35392 Gieﬂen\n",
+               "JLU Gie√üen\n",
+               "Arndtstra√üe 2\n",
+               "D-35392 Gie√üen\n",
                "Germany" ),
-       Place         := "Gieﬂen",
-       Institution   := "Justus-Liebig-Universit‰t Gieﬂen"
+       Place         := "Gie√üen",
+       Institution   := "Justus-Liebig-Universit√§t Gie√üen"
      )
     ],
 
-Status         := "Dev",
+Status         := "dev",
 #CommunicatedBy := "TODO",
 #AcceptDate     := "01/2004",
 
@@ -72,6 +72,21 @@ AvailabilityTest := ReturnTrue,
 TestFile := "tst/testall.g",
 
 Autoload         := true,
+
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+                    "&copyright; 2013 Max Horn<P/>\n",
+                    "The &UnitTests; package is free software;\n",
+                    "you can redistribute it and/or modify it under the terms of the\n",
+                    "<URL Text='GNU General Public License'>http://www.fsf.org/licenses/gpl.html</URL>\n",
+                    "as published by the Free Software Foundation; either version 2 of the License,\n",
+                    "or (at your option) any later version.\n"
+                ),
+    ),
+),
+    
 
 Keywords := [
   "unit tests",
