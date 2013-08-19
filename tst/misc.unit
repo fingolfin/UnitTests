@@ -1,0 +1,3 @@
+AddTestCase("package info", function()
+    AssertTrue( ValidatePackageInfo(PackageInfo("UnitTests")[1]) );
+end);

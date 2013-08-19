@@ -4,8 +4,7 @@ doc:
 	gap makedoc.g
 
 check:
-	# TODO: run ValidatePackageInfo()
-	# other stuff
+	gap tst/testall.g
 
 archive: check doc
 	# TODO: create an archive
