@@ -54,7 +54,6 @@ PackageDoc     := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "Unit tests for GAP",
-  Autoload  := true
 ),
 
 Dependencies    := rec(
@@ -70,9 +69,6 @@ Dependencies    := rec(
 AvailabilityTest := ReturnTrue,
 
 TestFile := "tst/testall.g",
-
-Autoload         := true,
-
 
 AutoDoc := rec(
     TitlePage := rec(
