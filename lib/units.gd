@@ -1,3 +1,17 @@
+##  <#GAPDoc Label="AssertionFailure">
+##  <ManSection>
+##    <Func Arg="arg" Name="AssertionFailure"/>
+##    <Returns>nothing</Returns>
+##    <Description>
+##      Called by assert functions to signal that the assertion failed.
+##      Accepts any number of arguments, which are combined to form a
+##      description of the assertion failure.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "AssertionFailure" );
+
 ##  <#GAPDoc Label="AssertEqual">
 ##  <ManSection>
 ##    <Func Arg="a, b" Name="AssertEqual"/>

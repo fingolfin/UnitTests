@@ -1,20 +1,25 @@
+InstallGlobalFunction( AssertionFailure, function(arg)
+	JUMP_TO_CATCH(["assertion failure",
+		       Concatenation(List(arg, String))]);
+end );
+
 InstallGlobalFunction( AssertEqual, function(a,b)
 	if not (a = b) then
 		# FIXME: String, ViewString, PrintString, DisplayString... ???
-		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but got <", String(b), ">"));
+		AssertionFailure("expected <", a, "> but got <", b, ">");
 	fi;
 end );
 
 InstallGlobalFunction( AssertTrue, function(a)
-  if not a then
-	  JUMP_TO_CATCH("expected true but got false");
-  fi;
+	if not a then
+		AssertionFailure("expected true but got false");
+	fi;
 end );
 
 InstallGlobalFunction( AssertFalse, function(a)
-  if a then
-	  JUMP_TO_CATCH("expected false but got true");
-  fi;
+	if a then
+		AssertionFailure("expected false but got true");
+	fi;
 end );
 
 
@@ -63,7 +68,7 @@ end );
 # Run a test suite, output results in TAP format, or at least try to.
 # See <http://en.wikipedia.org/wiki/Test_Anything_Protocol>
 InstallGlobalFunction( RunTestSuite, function(suite)
-	local i, success, total, res, oldBreakOnError;
+	local i, success, total, res, OriginalErrorInnerFunction, type, message;
 	if not suite.setup() then
 		Print("Test setup failed!");
 		return false;
@@ -73,17 +78,24 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 	Print("1..", total, "\n");
 	for i in [1..total] do
 		#Print("Running test '", suite.tests[i][1], "' (", i, "/", total, "): ");
-		oldBreakOnError := BreakOnError;
-		BreakOnError := false;
+		OriginalErrorInnerFunction := ErrorInner;
+		MakeReadWriteGlobal("ErrorInner");
+		ErrorInner := function(arg)
+			local errmsg;
+			errmsg := Concatenation( List( arg[ 2 ], String ) );
+			JUMP_TO_CATCH( [ "error", errmsg ] );
+		end;
+		MakeReadOnlyGlobal("ErrorInner");
 		res := CALL_WITH_CATCH(suite.tests[i][2], []);
-		BreakOnError := true;
+		MakeReadWriteGlobal("ErrorInner");
+		ErrorInner := OriginalErrorInnerFunction;
+		MakeReadOnlyGlobal("ErrorInner");
 		# Output status
 		if res[1] then
 			success := success + 1;
 			Print(TextAttr.bold, TextAttr.2, "ok ", TextAttr.reset);
 			#Print("ok ");
 		else
-			# TODO: distinguish between assertion failures, and errors
 			Print(TextAttr.bold, TextAttr.1, "not ok ", TextAttr.reset);
 			#Print("not ok ");
 		fi;
@@ -95,7 +107,18 @@ InstallGlobalFunction( RunTestSuite, function(suite)
 		if suite.tests[i][3] then Print(" # TODO"); fi;
 		Print("\n");
 		# Optionally: Display diagnostics
-		if not res[1] then Print("# ", res[2], "\n"); fi;
+		if not res[1] then
+			type := res[2][1];
+			message := res[2][2];
+			if type = "assertion failure" then
+				Print("# ", message, "\n");
+			elif type = "error" then
+				Print("# unexpected error: ", message, "\n");
+			else
+				# this should not happen
+				Error("bad value from JUMP_TO_CATCH: ", res[2]);
+			fi;
+		fi;
 		
 	od;
 	suite.teardown();
