@@ -68,26 +68,62 @@ DeclareGlobalFunction( "AssertFalse" );
 DeclareGlobalFunction( "AssertError" );
 
 
-##  <#GAPDoc Label="InstantiateTestSuite">
-##  <ManSection>
-##    <Func Arg="filename[, params]" Name="InstantiateTestSuite"/>
-##    <Returns>a test suite</Returns>
-##    <Description>
-##      Instantiate an (optionally parametrized) test suite.
-##    </Description>
-##  </ManSection>
-##  <#/GAPDoc>
-##
-DeclareGlobalFunction( "InstantiateTestSuite" );
+DeclareCategory( "IsTest", IsObject );
 
-##  <#GAPDoc Label="RunTestSuite">
+DeclareCategory( "IsTestContainer", IsObject );
+
+DeclareCategory( "IsTestCase", IsTestContainer );
+
+DeclareCategory( "IsTestSuite", IsTestContainer );
+
+DeclareCategory( "IsParametrizedTestCase", IsObject );
+
+DeclareOperation( "MakeTest", [ IsString, IsFunction, IsBool ] );
+
+DeclareAttribute( "TestName", IsTest );
+
+DeclareAttribute( "TestFunction", IsTest );
+
+DeclareProperty( "IsExpectedFail", IsTest );
+
+DeclareOperation( "Run", [ IsTest, IsPosInt ] );
+
+##  <#GAPDoc Label="TestCase">
 ##  <ManSection>
-##    <Func Arg="suite" Name="RunTestSuite"/>
-##    <Returns>TODO</Returns>
+##    <Func Arg="f" Name="TestCase"/>
+##    <Returns>a test case</Returns>
 ##    <Description>
-##      Run a test suite.
+##      Create a test case.  The argument <A>f</A> is a function taking
+##      four functions as arguments:
+##      <C>Setup</C>, <C>TearDown</C>, <C>Test</C> and <C>FailingTest</C>
+##      (see section <Ref Sect="InsideTest"/>).
+##      The function <A>f</A> uses these four functions to create the test case.
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
 ##
-DeclareGlobalFunction( "RunTestSuite" );
+DeclareOperation( "TestCase", [ IsFunction ] );
+
+DeclareAttribute( "SetupFunction", IsTestCase );
+
+DeclareAttribute( "TearDownFunction", IsTestCase );
+
+DeclareAttribute( "Tests", IsTestCase );
+
+DeclareOperation( "TestSuite", [ IsDenseList ] );
+
+DeclareAttribute( "TestContainers", IsTestSuite );
+
+DeclareAttribute( "NumberOfTests", IsTestContainer );
+
+DeclareOperation( "Run", [ IsTestContainer ] );
+
+DeclareOperation( "Run", [ IsTestContainer, IsPosInt ] );
+
+DeclareOperation( "ParametrizedTestCase", [ IsDenseList, IsFunction ] );
+
+DeclareAttribute( "InstantiationFunction", IsParametrizedTestCase );
+
+DeclareAttribute( "FilterList", IsParametrizedTestCase );
+
+DeclareOperation( "Instantiate", [ IsParametrizedTestCase, IsDenseList ] );

@@ -16,19 +16,18 @@
 </Section>
 
 <Section Label="Suites">
-<Heading>Loading and running test suites</Heading>
+<Heading>Creating and running test cases</Heading>
 
-<#Include Label="InstantiateTestSuite">
-<#Include Label="RunTestSuite">
+<#Include Label="TestCase">
 
 </Section>
 
 
 <Section Label="InsideTest">
-<Heading>Methods to be used within test suites</Heading>
+<Heading>Methods to be used within test cases</Heading>
 
 <ManSection>
-  <Func Arg="func" Name="AddSetup"/>
+  <Func Arg="func" Name="Setup"/>
   <Returns>nothing</Returns>
   <Description>
     TODO
@@ -36,7 +35,7 @@
 </ManSection>
 
 <ManSection>
-  <Func Arg="func" Name="AddTearDown"/>
+  <Func Arg="func" Name="TearDown"/>
   <Returns>nothing</Returns>
   <Description>
     TODO
@@ -44,7 +43,7 @@
 </ManSection>
 
 <ManSection>
-  <Func Arg="desc, func" Name="AddTestCase"/>
+  <Func Arg="desc, func" Name="Test"/>
   <Returns>nothing</Returns>
   <Description>
     TODO
@@ -52,7 +51,7 @@
 </ManSection>
 
 <ManSection>
-  <Func Arg="desc, func" Name="AddFailingTestCase"/>
+  <Func Arg="desc, func" Name="FailingTest"/>
   <Returns>nothing</Returns>
   <Description>
     TODO
