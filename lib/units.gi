@@ -1,7 +1,7 @@
 InstallGlobalFunction( AssertEqual, function(a,b)
 	if not (a = b) then
 		# FIXME: String, ViewString, PrintString, DisplayString... ???
-		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but got <", String(a), ">"));
+		JUMP_TO_CATCH(Concatenation("expected <", String(a), "> but got <", String(b), ">"));
 	fi;
 end );
 
@@ -13,7 +13,7 @@ end );
 
 InstallGlobalFunction( AssertFalse, function(a)
   if a then
-	  JUMP_TO_CATCH("expected false but got false");
+	  JUMP_TO_CATCH("expected false but got true");
   fi;
 end );
 
