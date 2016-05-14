@@ -22,6 +22,19 @@ InstallGlobalFunction( AssertFalse, function(a)
 	fi;
 end );
 
+InstallGlobalFunction( AssertError, function(msg, f, args)
+	local res, errmsg;
+	res := CALL_WITH_CATCH(f, args);
+	if res[1] then
+		AssertionFailure("expected Error(", msg, "...) but got no error");
+	else
+		errmsg := res[2][2];
+		if not StartsWith(errmsg, msg) then
+			AssertionFailure("expected Error(", msg, "...) but got Error(", errmsg, ")");
+		fi;
+	fi;
+end );
+
 
 __TEST_SUITE_FUNC__ := fail;
 

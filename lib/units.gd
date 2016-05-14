@@ -51,6 +51,21 @@ DeclareGlobalFunction( "AssertTrue" );
 ##
 DeclareGlobalFunction( "AssertFalse" );
 
+##  <#GAPDoc Label="AssertError">
+##  <ManSection>
+##    <Func Arg="msg, f, args" Name="AssertError"/>
+##    <Returns>nothing</Returns>
+##    <Description>
+##      Assert that calling the function <A>f</A> with the argument list
+##      <A>args</A> signals an error whose error message begins with <A>msg</A>.
+##      Trigger a test assertion if this is not true, that is, if <A>f</A>
+##      applied to <A>args</A> either does not signal an error, or signals
+##       an error whose message does not begin with <A>msg</A>.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+##
+DeclareGlobalFunction( "AssertError" );
 
 
 ##  <#GAPDoc Label="InstantiateTestSuite">

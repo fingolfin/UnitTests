@@ -10,6 +10,7 @@
 <#Include Label="AssertTrue">
 <#Include Label="AssertFalse">
 <#Include Label="AssertEqual">
+<#Include Label="AssertError">
 <#Include Label="AssertionFailure">
 
 </Section>
