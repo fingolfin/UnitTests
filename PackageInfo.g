@@ -15,23 +15,24 @@ Date := ~.Version{[ 1 .. 10 ]},
 Date := Concatenation( ~.Date{[ 9, 10 ]}, "/", ~.Date{[ 6, 7 ]}, "/", ~.Date{[ 1 .. 4 ]} ),
 
 Persons          := [
-  rec( LastName      := "Horn",
-       FirstNames    := "Max",
-       IsAuthor      := true,
-       IsMaintainer  := true,
-       Email         := "max.horn@math.uni-giessen.de",
-       WWWHome       := "http://www.quendi.de/math",
-       PostalAddress := Concatenation(
-               "AG Algebra\n",
-               "Mathematisches Institut\n",
-               "JLU Gießen\n",
-               "Arndtstraße 2\n",
-               "D-35392 Gießen\n",
-               "Germany" ),
-       Place         := "Gießen",
-       Institution   := "Justus-Liebig-Universität Gießen"
-     )
-    ],
+  rec(
+    LastName      := "Horn",
+    FirstNames    := "Max",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
+  )
+],
 
 Status         := "dev",
 #CommunicatedBy := "TODO",
